@@ -1,0 +1,34 @@
+﻿<Window x:Class="POMODOROTIMER.View.SetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POMODOROTIMER.View"
+        xmlns:US="clr-namespace:POMODOROTIMER.View.UserControls"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Background="#452F6C"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Title="SetWindow" Height="180" Width="300">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <US:MainTopBar/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel  HorizontalAlignment="Center" Margin="0,10,0,0">
+                <RadioButton x:Name="SW" Content="Stop Watch" IsChecked="True" Foreground="Wheat"/>
+                <RadioButton x:Name="T" Content="Timer" Foreground="Wheat"/>
+                <TextBox x:Name="tbInput" Text="timer time (example: 00:10:00)" TextChanged="tbInput_TextChanged" Margin="0,10,0,0"/>
+                <Button x:Name="btnOk" Content="ok"  Style="{DynamicResource btnOptional}" Click="Ok_Click" IsEnabled="True" Panel.ZIndex="-1"/>
+            </StackPanel>
+            
+        </Grid>
+    </Grid>
+</Window>

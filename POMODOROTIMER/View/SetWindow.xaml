@@ -23,10 +23,10 @@
         </Grid>
         <Grid Grid.Row="1">
             <StackPanel  HorizontalAlignment="Center" Margin="0,10,0,0">
-                <RadioButton x:Name="SW" Content="Stop Watch" IsChecked="True" Foreground="Wheat"/>
-                <RadioButton x:Name="T" Content="Timer" Foreground="Wheat"/>
-                <TextBox x:Name="tbInput" Text="timer time (example: 00:10:00)" TextChanged="tbInput_TextChanged" Margin="0,10,0,0"/>
-                <Button x:Name="btnOk" Content="ok"  Style="{DynamicResource btnOptional}" Click="Ok_Click" IsEnabled="True" Panel.ZIndex="-1"/>
+                <RadioButton x:Name="SW" Content="Stop Watch" GroupName="Options" Foreground="Wheat" Checked="SW_Checked"/>
+                <RadioButton x:Name="T" Content="Timer" GroupName="Options" Foreground="Wheat" Checked="T_Checked"/>
+                <TextBox x:Name="tbInput" Text="timer time (example: 00:10:00)" TextChanged="tbInput_TextChanged" Margin="0,10,0,0" />
+                <Button x:Name="btnOk" Content="ok"  Style="{DynamicResource btnOptional}" Click="Ok_Click" IsEnabled="False" Panel.ZIndex="-1"/>
             </StackPanel>
             
         </Grid>

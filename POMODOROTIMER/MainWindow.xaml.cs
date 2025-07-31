@@ -21,12 +21,10 @@ namespace POMODOROTIMER
     /// </summary>
     public partial class MainWindow : Window
     {
-        BaseTimer pTimer;
         MainWindowViewModel mwvm;
         public MainWindow()
         {
-            pTimer = new PTimer("00:10:00");
-            mwvm = new MainWindowViewModel(pTimer);
+            mwvm = new MainWindowViewModel();
             DataContext = mwvm;
             InitializeComponent();
         }
@@ -45,12 +43,8 @@ namespace POMODOROTIMER
         {
             SetWindow st = new SetWindow();
             st.ShowDialog();
-            if(st.timer)
-            {
-                tbTimer.Text = st.time;
-                //pTimer = PTimer(tbTimer.Text.ToString());
-            }
-            
+            mwvm.test(st.time, st.timer);
+            mwvm.SwitchTimer();
         }
     }
 }

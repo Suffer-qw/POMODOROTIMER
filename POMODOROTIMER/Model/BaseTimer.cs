@@ -10,12 +10,12 @@ namespace POMODOROTIMER.Model
     abstract class BaseTimer
     {
         public string strTime;
-        public int[] time;
+        public TimeSpan time;
         public DispatcherTimer pt;
 
         public BaseTimer()
         {
-            time = new int[6];
+            time = new TimeSpan(0, 0, 0);
             pt = new DispatcherTimer();
             pt.Tick += new EventHandler(Timer_Tick);
             pt.Interval = new TimeSpan(0, 0, 1);
@@ -36,6 +36,9 @@ namespace POMODOROTIMER.Model
         public abstract void Start();
 
         public abstract void Stop();
+
+        public abstract PStopwatch UpdateState();
+        public abstract PTimer UpdateState(string strtime);
 
         public abstract void Timer_Tick(object sender, EventArgs e);
     }

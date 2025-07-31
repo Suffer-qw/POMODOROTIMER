@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Xml.Linq;
 using POMODOROTIMER.Model;
 using POMODOROTIMER.MvvM;
 using POMODOROTIMER.View;
@@ -22,19 +23,19 @@ namespace POMODOROTIMER.ViewModel
 
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
-        private  BaseTimer _timer;
+        public  BaseTimer _timer;
         private string _currentTime;
-        public string _name ="none";
+        public string _name = "Stopwatch";
         private string _ContentStart = "Start";
         public ObservableCollection<HistoriPT> Histlist => HistoryManager._histlist;
-        public MainWindowViewModel(BaseTimer timer)
+        public MainWindowViewModel()
         {
+            _timer = new PStopwatch();
             _currentTime = "00:00:00";
-            _timer = timer;
             _timer.pt.Tick += (sender, e) => CurrentTime = _timer.strTime;
         }
       
-
+        /*
         public MainWindowViewModel()
         {
             Histlist.Add(new HistoriPT
@@ -44,6 +45,7 @@ namespace POMODOROTIMER.ViewModel
                 Date = "dd.MM.yyyy"
             });
         }
+        */
         public RelayCommand SwitchCommand => new RelayCommand(execute => SwitchTimer(), canExecute => { return true; });
         public RelayCommand ShowHisCommand => new RelayCommand(execute => ShowHis(), canExecute => { return true; });
 
@@ -99,6 +101,28 @@ namespace POMODOROTIMER.ViewModel
                 ContentStart = "Start";
                 CurrentTime = _timer.strTime;
             }
+        }
+
+        public void test(string strtime, bool tt)
+        {
+            if (tt)
+            {
+                _timer.pt.Tick -= (sender, e) => CurrentTime = _timer.strTime;
+                Name = "PTimer";
+                _timer = _timer.UpdateState(strtime);
+                
+            }
+            else
+            {
+                if (_timer is PTimer)
+                {
+                    _timer.pt.Tick -= (sender, e) => CurrentTime = _timer.strTime;
+                    Name = "PStopwatch";
+                    _timer = _timer.UpdateState();
+                }
+            }
+            _currentTime = _timer.strTime;
+            _timer.pt.Tick += (sender, e) => CurrentTime = _timer.strTime;
         }
 
         public void SaveHis()

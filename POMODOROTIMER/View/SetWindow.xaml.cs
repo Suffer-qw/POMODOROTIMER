@@ -44,20 +44,32 @@ namespace POMODOROTIMER.View
 
         private void tbInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (btnOk == null || SW == null || T == null || tbInput == null)
+            if (btnOk == null || T == null || tbInput == null)
                 return;
-            if ((bool)SW.IsChecked)
+           if ((bool)T.IsChecked && Regex.IsMatch(tbInput.Text.Trim(), pattern))
+           {
+                btnOk.IsEnabled = true;
+                timer = true;
+           }
+            else
+                btnOk.IsEnabled = false;
+        }
+
+        private void SW_Checked(object sender, RoutedEventArgs e)
+        {
+            btnOk.IsEnabled = true;
+            timer = false;
+        }
+
+        private void T_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Regex.IsMatch(tbInput.Text.Trim(), pattern))
             {
                 btnOk.IsEnabled = true;
                 timer = true;
             }
-            else if ((bool)T.IsChecked && Regex.IsMatch(tbInput.Text.Trim(), pattern))
-            {
-                btnOk.IsEnabled = true;
-                timer = false;
-            }
-            else
-                btnOk.IsEnabled = false;
+            else 
+                btnOk.IsEnabled= false;
         }
     }
 }
